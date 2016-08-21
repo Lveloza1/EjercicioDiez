@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USUARIO
@@ -27,21 +29,104 @@ public class principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JTextField();
+        txtFotografias = new javax.swing.JTextField();
+        cmdCalcular = new javax.swing.JButton();
+        cmdBorrar = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Traditional Arabic", 1, 18)); // NOI18N
+        jLabel1.setText("10. Revelado de un rollo");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 210, 60));
+
+        jLabel2.setFont(new java.awt.Font("Vrinda", 1, 14)); // NOI18N
+        jLabel2.setText("Costo del revelado Iva inc.");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Vrinda", 1, 14)); // NOI18N
+        jLabel3.setText("Número de fotografías");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        txtCosto.setEditable(false);
+        getContentPane().add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 90, 30));
+
+        txtFotografias.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFotografiasKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtFotografias, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 90, 30));
+
+        cmdCalcular.setText("Calcular Precio");
+        cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCalcularActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 120, 30));
+
+        cmdBorrar.setText("Nuevo");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 310, 80, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
+ int  nfotos;
+ double total, totalf, iva;
+ String costo;
+
+ if(txtFotografias.getText().trim().isEmpty()){
+         JOptionPane.showMessageDialog(this, "Digite el número de fotografías","error", JOptionPane.ERROR_MESSAGE);
+         txtFotografias.requestFocusInWindow();
+     }
+     
+     else{
+    nfotos=Integer.parseInt(txtFotografias.getText());
+    
+    if(nfotos== 0){
+      JOptionPane.showMessageDialog(this, "No se aplica costo","Note", JOptionPane.INFORMATION_MESSAGE);  
+        txtFotografias.requestFocusInWindow();
+        txtFotografias.selectAll();
+     }  
+   total=(nfotos*1500);
+   iva=(total*0.16);
+   totalf=(total+iva);
+   
+   costo=String.valueOf(totalf);
+   txtCosto.setText (costo);
+    
+    }
+    
+
+    }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void txtFotografiasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFotografiasKeyTyped
+char c=evt.getKeyChar(); 
+       
+          if(!Character.isDigit(c)) { 
+              getToolkit().beep();    
+              evt.consume(); 
+          }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFotografiasKeyTyped
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+     txtFotografias.setText("");
+     txtCosto.setText("");
+     txtFotografias.requestFocusInWindow();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +164,12 @@ public class principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBorrar;
+    private javax.swing.JButton cmdCalcular;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextField txtFotografias;
     // End of variables declaration//GEN-END:variables
 }
